@@ -75,3 +75,7 @@ const handleClick = (event) => {
 };
 
 choices.forEach(choice => choice.addEventListener("click", handleClick));
+
+
+
+/////Manikanta
