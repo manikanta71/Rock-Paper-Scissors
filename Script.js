@@ -4,9 +4,9 @@ const Target = 10;
 
 const choices = document.querySelectorAll(".choice");
 const msg = document.querySelector("#msg");
+
 const userScorePara = document.querySelector("#userScore");
 const compScorePara = document.querySelector("#compScore");
-const restartBtn = document.querySelector("#restart");
 
 const genCompChoice = () => {
   const options = ["rock", "paper", "scissors"];
@@ -15,34 +15,33 @@ const genCompChoice = () => {
 };
 
 const drawGame = () => {
-  msg.innerText = "It's a Draw! Try again.";
-  msg.style.backgroundColor = "#ffc107";
+  msg.innerText = "Game was Draw. Play again.";
+  msg.style.backgroundColor = "#081b31";
 };
 
 const showWinner = (userWin, userChoice, compChoice) => {
   if (userWin) {
     userScore++;
     userScorePara.innerText = userScore;
-    msg.innerText = `You Win! 🎉 ${userChoice} beats ${compChoice}`;
+    msg.innerText = `You win! Your ${userChoice} beats ${compChoice}`;
     msg.style.backgroundColor = "green";
   } else {
     compScore++;
     compScorePara.innerText = compScore;
-    msg.innerText = `You Lost. 😞 ${compChoice} beats ${userChoice}`;
+    msg.innerText = `You lost. ${compChoice} beats your ${userChoice}`;
     msg.style.backgroundColor = "red";
   }
 };
 
 const checkEndGame = () => {
   if (userScore === Target || compScore === Target) {
-    if (userScore > compScore) {
-      msg.innerText = `Game Over! You are the Winner! 🎉`;
+    if (userScore > compScore){
+      msg.innerText = `Game End! you win!`;
     } else {
-      msg.innerText = `Game Over! Computer Wins! 😞`;
+      msg.innerText = `Game End! Computer win!`;
     }
-    msg.style.backgroundColor = "purple";
+    msg.style.backgroundColor = "green";
     choices.forEach(choice => choice.removeEventListener("click", handleClick));
-    restartBtn.style.display = "block"; // Show Restart Button
   }
 };
 
@@ -75,16 +74,4 @@ const handleClick = (event) => {
   playGame(userChoice);
 };
 
-const restartGame = () => {
-  userScore = 0;
-  compScore = 0;
-  userScorePara.innerText = userScore;
-  compScorePara.innerText = compScore;
-  msg.innerText = "Make your choice:";
-  msg.style.backgroundColor = "#081b31";
-  choices.forEach(choice => choice.addEventListener("click", handleClick));
-  restartBtn.style.display = "none";
-};
-
 choices.forEach(choice => choice.addEventListener("click", handleClick));
-restartBtn.addEventListener("click", restartGame);
